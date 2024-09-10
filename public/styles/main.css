@@ -1,6 +1,7 @@
 body {
     min-height: 100vh;
-    background: #c6e8ec;
+    
+    background-image : linear-gradient( 45deg,  rgb(211, 117, 195), rgb(85, 230, 210));
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -8,14 +9,27 @@ body {
 
 #list {
     text-align:start;
+    margin-bottom: 1vh ;
+    font-size: 17x;
 }
 
 h3 {
     text-align: center;
+    background-image: linear-gradient(rgb(123, 38, 192), blue);
+    color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    font-family: "Nerko One", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 #main {
-    width: 40%;
+    width: 55%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -25,8 +39,9 @@ h3 {
 #pic {
     display: flex;
     width: 100%;
-    padding: 4vh;
+    padding: 2vh;
     justify-content: space-around;
+    
 }
 
 #ingredients {
@@ -40,3 +55,130 @@ h3 {
 #ingredients  h3 {
 justify-content: center;
 }
+
+#foto {
+    border-width: 10px;
+    border-image-source: linear-gradient(  rgb(8, 12, 231), rgb(238, 241, 12));
+    border-radius: 10%;
+    width: 300px;
+
+}
+
+#button1 {
+    width: 150px;
+    height: 30px;
+    margin: 1vh;
+    border-radius: 5%;
+    background-color: rgb(168, 231, 139);
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+
+}
+
+#buttons {
+    display: flex;
+    
+}
+
+#buttons > div {
+    display: flex;
+}
+.button { 
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+    color: green;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 160px;
+    margin: 1vh;
+    text-transform: uppercase;
+}
+
+
+
+.select {
+    width: 150px;
+    height: 30px;
+    margin: 1vh;
+    text-align: center;
+    background-color: rgb(168, 231, 139);
+}
+
+h1 {
+    background-image: linear-gradient(blue, rgb(47, 200, 75));
+    color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    font-family: "Nerko One", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 72px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.text {
+    background-image: linear-gradient(rgb(48, 17, 73), blue);
+    color: transparent;
+    background-clip: text;
+    text-transform:none;
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    font-family:Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+
+@media (max-width: 1100px) {
+
+    #pic {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+    }
+
+    #main {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 60px;
+    }
+
+    #buttons > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .text {
+        font-size: 15px;
+    }
+}
+

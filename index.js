@@ -120,7 +120,7 @@ app.get("/", async (req, res) => {
             const ingredients = [];
             const allIngredients = await axios.get( API_URL + "list.php?i=list" );
             const ingrData = allIngredients.data.drinks;
-            console.log(ingrData)
+            
             
       
             for (let i=1; i <= 15; i++) {
@@ -159,7 +159,7 @@ try {
   const ingredients = [];
   const allIngredients = await axios.get( API_URL + "list.php?i=list" );
   const ingrData = allIngredients.data.drinks;
-  console.log(ingrData)
+  
   
 
   for (let i=1; i <= 15; i++) {

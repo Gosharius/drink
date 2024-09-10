@@ -6,49 +6,52 @@
 
     <title>Random Drink</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="main">
-    <h1>WHAT WILL WE DRINK TODAY?</h1>
+    
     <div>
-        <h2> <%=name%>  </h2>
+        <h1> <%=name%>  </h1>
     </div>
 
     <div id="pic">
-        <div>
-            <img src=" <%=picture%>/preview" >
+        <div id="photo" >
+            <img src=" <%=picture%>" id="foto" >
         </div>
         
         <div id="ingredients" >
             <h3>Ingredients</h3>
             <ul >
                 <% for (let i=0; i<ingredients.length; i++) { %>
-                <li id="list"> <%= ingredients[i] %>  </li>
+                <li id="list" class="text"> <%= ingredients[i] %>  </li>
                 <% } %>
             </ul>
         </div>
     </div>
     <div>
         <h3> Instruction</h3>
-        <p>
+        <p class="text">
             <%=instruction%>
         </p>
     </div>
-    <div>
-    <button type="submit" id="random" onclick="window.location.href='/random'">Random cocktail</button>
-    <button type="submit" id="gin" onclick="window.location.href='/gin'">With Gin</button>
-
-    <button type="submit" for="all"  onclick="window.location.href='/noalc'">WIthout Alcohol</button>
+    <div id="buttons">
+        <div>
+    <button type="submit" id="random" class="button" onclick="window.location.href='/random'">RANDOM</button>
+    <button type="submit" id="gin" class="button" onclick="window.location.href='/gin'">WITH GIN</button>
+        </div>
+        <div>
+    <button type="submit" for="all"  class="button" onclick="window.location.href='/noalc'">NO ALCOHOL</button>
     
-    <select name="all" id="all" onchange="getValue(this)">
+    <select name="all" id="all" class="button" onchange="getValue(this)">
             <% for (let i=0; i<ingrData.length; i++) { %>
                 <option  type="text" name="ingred" > <%=ingrData[i].strIngredient1%> </option>
-                <% } %>
-                
-            
-       
+                <% } %>  
+                  
         </select>
-        
+    </div>
     </div>
 </div>
 <script>
