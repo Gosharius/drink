@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Random Drink</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+<body>
+<div id="main">
+    <h1>WHAT WILL WE DRINK TODAY?</h1>
+    <div>
+        <h2> <%=name%>  </h2>
+    </div>
+
+    <div id="pic">
+        <div>
+            <img src=" <%=picture%>/preview" >
+        </div>
+        
+        <div id="ingredients" >
+            <h3>Ingredients</h3>
+            <ul >
+                <% for (let i=0; i<ingredients.length; i++) { %>
+                <li id="list"> <%= ingredients[i] %>  </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h3> Instruction</h3>
+        <p>
+            <%=instruction%>
+        </p>
+    </div>
+    <div>
+    <button type="submit" id="random" onclick="window.location.href='/random'">Random cocktail</button>
+    <button type="submit" id="gin" onclick="window.location.href='/gin'">With Gin</button>
+
+    <button type="submit" for="all"  onclick="window.location.href='/noalc'">WIthout Alcohol</button>
+    
+    <select name="all" id="all" onchange="getValue(this)">
+            <% for (let i=0; i<ingrData.length; i++) { %>
+                <option  type="text" name="ingred" > <%=ingrData[i].strIngredient1%> </option>
+                <% } %>
+                
+            
+       
+        </select>
+        
+    </div>
+</div>
+<script>
+    function getValue(data) {
+       window.location.href = `/select?ing=${data.value.replace(' ', '_')}`
+    }
+</script>
+</body>
+</html>
