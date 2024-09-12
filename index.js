@@ -59,7 +59,7 @@ app.get("/", async (req, res) => {
               ingredients.push(ingredient + " - " + amount);
             }
           }
-            res.render("index.ejs", { 
+            res.json( { 
               name: cocktail.strDrink,
               picture: cocktail.strDrinkThumb,
               instruction: cocktail.strInstructions,
@@ -94,7 +94,7 @@ app.get("/", async (req, res) => {
                 ingredients.push(ingredient + " - " + amount);
               }
             }
-              res.render("index.ejs", { 
+              res.json( { 
                 name: cocktailData.strDrink,
                 picture: cocktailData.strDrinkThumb,
                 instruction: cocktailData.strInstructions,
@@ -107,11 +107,11 @@ app.get("/", async (req, res) => {
         }
         });
     
-        app.get("/select", async (req, res) => {
+        app.get("/select", async (req, res) => { 
 
          
           try {
-            const selectIngr = req.query.ing ? req.query.ing : 'gin';
+            const selectIngr = req.query.ing;
             const result = await axios.get( API_URL + `filter.php?i=${selectIngr}` );
             const  cocktail = result.data.drinks[Math.floor(Math.random()*result.data.drinks.length)];     
             const coctailId = cocktail.idDrink;
@@ -133,7 +133,7 @@ app.get("/", async (req, res) => {
               }
 
               
-                res.render("index.ejs", { 
+              res.json(  { 
                   name: cocktailData.strDrink,
                   picture: cocktailData.strDrinkThumb,
                   instruction: cocktailData.strInstructions,
@@ -172,7 +172,7 @@ try {
     }
 
     
-      res.render("index.ejs", { 
+      res.json( { 
         name: cocktailData.strDrink,
         picture: cocktailData.strDrinkThumb,
         instruction: cocktailData.strInstructions,

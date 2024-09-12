@@ -9,22 +9,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
 </head>
 <body>
 <div id="main">
     
     <div>
-        <h1> <%=name%>  </h1>
+        <h1 id="cocktailName"> <%=name%>  </h1>
     </div>
 
     <div id="pic">
         <div id="photo" >
-            <img src=" <%=picture%>" id="foto" >
+            <img src="<%=picture%>" id="foto" >
         </div>
         
         <div id="ingredients" >
             <h3>Ingredients</h3>
-            <ul >
+            <ul id="ingredientsList">
                 <% for (let i=0; i<ingredients.length; i++) { %>
                 <li id="list" class="text"> <%= ingredients[i] %>  </li>
                 <% } %>
@@ -33,19 +36,19 @@
     </div>
     <div>
         <h3> Instruction</h3>
-        <p class="text">
+        <p class="text" id="cocktailInstruction">
             <%=instruction%>
         </p>
     </div>
     <div id="buttons">
         <div>
-    <button type="submit" id="random" class="button" onclick="window.location.href='/random'">RANDOM</button>
-    <button type="submit" id="gin" class="button" onclick="window.location.href='/gin'">WITH GIN</button>
+    <button type="submit" id="random" class="button" >RANDOM</button>
+    <button type="submit" id="gin" class="button" >WITH GIN</button>
         </div>
         <div>
-    <button type="submit" for="all"  class="button" onclick="window.location.href='/noalc'">NO ALCOHOL</button>
+    <button type="submit" for="all" id="noalc" class="button">NO ALCOHOL</button>
     
-    <select name="all" id="all" class="button" onchange="getValue(this)">
+    <select name="all" id="allIngredients" class="button" onchange="getValue(this)">
             <% for (let i=0; i<ingrData.length; i++) { %>
                 <option  type="text" name="ingred" > <%=ingrData[i].strIngredient1%> </option>
                 <% } %>  
@@ -54,10 +57,152 @@
     </div>
     </div>
 </div>
-<script>
+<script >
+
     function getValue(data) {
-       window.location.href = `/select?ing=${data.value.replace(' ', '_')}`
-    }
-</script>
+     let nospace =  data.value.replace(' ', '_');
+     console.log(nospace);
+    
+        document.getElementById("allIngredients").addEventListener("change", function() {
+   
+        axios.get('/select',  {
+                params: {ing: nospace}
+            })
+            .then(response => {
+          const data = response.data;
+        
+ 
+          // Оновлення коктейлю
+          document.getElementById('cocktailName').textContent = data.name;
+          document.getElementById('foto').src = data.picture;
+          document.getElementById('cocktailInstruction').textContent = data.instruction;
+ 
+          // Оновлення інгредієнтів
+          const ingredientsList = document.getElementById('ingredientsList');
+          ingredientsList.innerHTML = ''; // Очищення попереднього списку
+          data.ingredients.forEach(ingredient => {
+              const li = document.createElement('li');
+              li.textContent = ingredient;
+              ingredientsList.appendChild(li);
+          });
+ 
+          // Оновлення списку всіх інгредієнтів (селект)
+          const selectElement = document.getElementById('allIngredients');
+          selectElement.innerHTML = ''; // Очищення попереднього списку
+          data.ingrData.forEach(ingredient => {
+              const option = document.createElement('option');
+              option.textContent = ingredient.strIngredient1;
+              selectElement.appendChild(option);
+          });
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+ });
+}
+    
+  document.getElementById("random").addEventListener("click", function() {
+  axios.get('/random')
+      .then(response => {
+          const data = response.data;
+ 
+          // Оновлення коктейлю
+          document.getElementById('cocktailName').textContent = data.name;
+          document.getElementById('foto').src = data.picture;
+          document.getElementById('cocktailInstruction').textContent = data.instruction;
+ 
+          // Оновлення інгредієнтів
+          const ingredientsList = document.getElementById('ingredientsList');
+          ingredientsList.innerHTML = ''; // Очищення попереднього списку
+          data.ingredients.forEach(ingredient => {
+              const li = document.createElement('li');
+              li.textContent = ingredient;
+              ingredientsList.appendChild(li);
+          });
+ 
+          // Оновлення списку всіх інгредієнтів (селект)
+          const selectElement = document.getElementById('allIngredients');
+          selectElement.innerHTML = ''; // Очищення попереднього списку
+          data.ingrData.forEach(ingredient => {
+              const option = document.createElement('option');
+              option.textContent = ingredient.strIngredient1;
+              selectElement.appendChild(option);
+          });
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+ });
+ 
+
+ document.getElementById("gin").addEventListener("click", function() {
+  axios.get('/gin')
+      .then(response => {
+          const data = response.data;
+ 
+          // Оновлення коктейлю
+          document.getElementById('cocktailName').textContent = data.name;
+          document.getElementById('foto').src = data.picture;
+          document.getElementById('cocktailInstruction').textContent = data.instruction;
+ 
+          // Оновлення інгредієнтів
+          const ingredientsList = document.getElementById('ingredientsList');
+          ingredientsList.innerHTML = ''; // Очищення попереднього списку
+          data.ingredients.forEach(ingredient => {
+              const li = document.createElement('li');
+              li.textContent = ingredient;
+              ingredientsList.appendChild(li);
+          });
+ 
+          // Оновлення списку всіх інгредієнтів (селект)
+          const selectElement = document.getElementById('allIngredients');
+          selectElement.innerHTML = ''; // Очищення попереднього списку
+          data.ingrData.forEach(ingredient => {
+              const option = document.createElement('option');
+              option.textContent = ingredient.strIngredient1;
+              selectElement.appendChild(option);
+          });
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+ });
+ 
+
+ document.getElementById("noalc").addEventListener("click", function() {
+  axios.get('/noalc')
+      .then(response => {
+          const data = response.data;
+ 
+          // Оновлення коктейлю
+          document.getElementById('cocktailName').textContent = data.name;
+          document.getElementById('foto').src = data.picture;
+          document.getElementById('cocktailInstruction').textContent = data.instruction;
+ 
+          // Оновлення інгредієнтів
+          const ingredientsList = document.getElementById('ingredientsList');
+          ingredientsList.innerHTML = ''; // Очищення попереднього списку
+          data.ingredients.forEach(ingredient => {
+              const li = document.createElement('li');
+              li.textContent = ingredient;
+              ingredientsList.appendChild(li);
+          });
+ 
+          // Оновлення списку всіх інгредієнтів (селект)
+          const selectElement = document.getElementById('allIngredients');
+          selectElement.innerHTML = ''; // Очищення попереднього списку
+          data.ingrData.forEach(ingredient => {
+              const option = document.createElement('option');
+              option.textContent = ingredient.strIngredient1;
+              selectElement.appendChild(option);
+          });
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+ });
+ 
+ 
+ </script>
 </body>
 </html>
